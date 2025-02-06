@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Cat - Buy Token</title>
+    <style>
+        /* Genel Stil */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: url('3492868.gif'); /* Arkaplan GIF'i */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Animasyonlar */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Yarı saydam navbar */
+            border-bottom: 2px solid #ffcc00;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        .navbar .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .navbar button {
+            background-color: transparent;
+            border: none;
+            color: #ffcc00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .navbar button:hover {
+            color: #e6b800;
+            transform: scale(1.1);
+        }
+
+        /* Zamanlayıcı */
+        .timer-container {
+            text-align: center;
+            margin-top: 20px;
+            animation: slideIn 1s ease-in-out;
+        }
+        .timer {
+            font-size: 36px;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+        /* Ana İçerik */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            height: 80vh;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .left-content {
+            flex: 1;
+            text-align: center;
+        }
+        .left-content img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            animation: pulse 2s infinite;
+        }
+        .right-content {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .buy-box {
+            background-color: rgba(26, 26, 26, 0.9); /* Yarı saydam kutu */
+            padding: 40px;
+            border-radius: 15px;
+            width: 550px;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
+            animation: slideIn 1s ease-in-out;
+        }
+        .buy-box h2 {
+            font-size: 28px;
+            color: #ffcc00;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .buy-box input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .buy-box .usdt-conversion {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .buy-box button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background-color: #ffcc00;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .buy-box button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        /* NowPayments.io Widget */
+        .widget-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .widget-container {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
+            animation: slideIn 0.5s ease-in-out;
+        }
+        .widget-container iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 10px;
+        }
+        .close-widget {
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .close-widget:hover {
+            background-color: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Money Cat</div>
+        <div class="nav-buttons">
+            <button onclick="window.location.href='buy-token.html'">Buy Token</button>
+            <button onclick="window.location.href='whitepaper.html'">Whitepaper</button>
+            <button onclick="window.location.href='contact.html'">Contact</button>
+        </div>
+    </div>
+
+    <!-- Zamanlayıcı -->
+    <div class="timer-container">
+        <div class="timer" id="timer">65:00:00:00</div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="container">
+        <!-- Sol Taraf -->
+        <div class="left-content">
+            <img src="moneycatlogo.png" alt="Money Cat Logo">
+        </div>
+
+        <!-- Sağ Taraf -->
+        <div class="right-content">
+            <div class="buy-box">
+                <h2>Buy Token</h2>
+                <input type="number" id="amount" placeholder="Enter Money Cat amount (Min: 50)" min="50" oninput="updateUSDT()">
+                <div class="usdt-conversion" id="usdtConversion">USDT: 0</div>
+                <button onclick="validateAmount()">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NowPayments.io Widget -->
+    <div class="widget-overlay" id="widgetOverlay">
+        <div class="widget-container">
+            <iframe id="nowpaymentsWidget" src="" frameborder="0"></iframe>
+            <button class="close-widget" onclick="closeWidget()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Timer Logic
+        let countdown = 65 * 24 * 60 * 60; // 65 days in seconds
+        const timerElement = document.getElementById('timer');
+
+        function updateTimer() {
+            const days = Math.floor(countdown / (24 * 60 * 60));
+            const hours = Math.floor((countdown % (24 * 60 * 60)) / (60 * 60));
+            const minutes = Math.floor((countdown % (60 * 60)) / 60);
+            const seconds = countdown % 60;
+            timerElement.textContent = `${days}:${hours}:${minutes}:${seconds}`;
+            if (countdown > 0) {
+                countdown--;
+            } else {
+                clearInterval(timerInterval);
+            }
+        }
+
+        const timerInterval = setInterval(updateTimer, 1000);
+
+        // USDT Dönüşümü
+        function updateUSDT() {
+            const amount = document.getElementById('amount').value;
+            const usdtAmount = (amount / 50) * 10; // 50 Money Cat = 10 USDT
+            document.getElementById('usdtConversion').textContent = `USDT: ${usdtAmount.toFixed(2)}`;
+        }
+
+        // Token Miktarı Doğrulama ve Widget Açma
+        function validateAmount() {
+            const amount = document.getElementById('amount').value;
+            if (amount < 50) {
+                alert('Minimum 50 Money Cat token alabilirsiniz.');
+            } else {
+                openWidget();
+            }
+        }
+
+        // NowPayments.io Widget Açma
+        function openWidget() {
+            const amount = document.getElementById('amount').value;
+            const usdtAmount = (amount / 50) * 10; // 50 Money Cat = 10 USDT
+            const widgetUrl = `https://nowpayments.io/donation/moneycat?amount=${usdtAmount}&currency=USDT`;
+            document.getElementById('nowpaymentsWidget').src = widgetUrl;
+            document.getElementById('widgetOverlay').style.display = 'flex';
+        }
+
+        // Widget Kapatma
+        function closeWidget() {
+            document.getElementById('widgetOverlay').style.display = 'none';
+            document.getElementById('nowpaymentsWidget').src = '';
+        }
+    </script>
+</body>
+</html>

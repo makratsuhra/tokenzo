@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Cat - Whitepaper</title>
+    <style>
+        /* Genel Stil */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: url('3492868.gif'); /* Arkaplan GIF'i */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Animasyonlar */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Yarı saydam navbar */
+            border-bottom: 2px solid #ffcc00;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        .navbar .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .navbar button {
+            background-color: transparent;
+            border: none;
+            color: #ffcc00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .navbar button:hover {
+            color: #e6b800;
+            transform: scale(1.1);
+        }
+
+        /* Ana İçerik */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            padding: 50px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .whitepaper-box {
+            background-color: rgba(26, 26, 26, 0.9); /* Yarı saydam kutu */
+            padding: 40px;
+            border-radius: 15px;
+            width: 600px;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
+            text-align: center;
+            animation: slideIn 1s ease-in-out;
+        }
+        .whitepaper-box h1 {
+            font-size: 36px;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+        .whitepaper-box p {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 40px;
+        }
+        .download-button {
+            padding: 15px 30px;
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .download-button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Money Cat</div>
+        <div class="nav-buttons">
+            <button onclick="window.location.href='buy-token.html'">Buy Token</button>
+            <button onclick="window.location.href='whitepaper.html'">Whitepaper</button>
+            <button onclick="window.location.href='contact.html'">Contact</button>
+        </div>
+    </div>
+
+    <!-- Ana İçerik -->
+    <div class="container">
+        <div class="whitepaper-box">
+            <h1>Whitepaper</h1>
+            <p>Money Cat projesi hakkında detaylı bilgi almak için whitepaper'ı indirin.</p>
+            <button class="download-button" onclick="downloadWhitepaper()">Download Whitepaper</button>
+        </div>
+    </div>
+
+    <script>
+        function downloadWhitepaper() {
+            alert('Whitepaper indiriliyor...');
+            // Add download logic here
+        }
+    </script>
+</body>
+</html>
